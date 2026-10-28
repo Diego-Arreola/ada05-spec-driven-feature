@@ -1,15 +1,24 @@
-# Agent Instructions
+# AGENTS.md
 
-## Project Rules
-* Read REQUIREMENTS.md before implementing[cite: 4].
-* Read SPEC.md before implementing[cite: 4].
-* Read ARCHITECTURE.md before architectural changes[cite: 4].
-* Follow TASKS.md strictly, one at a time[cite: 4].
-* Do not invent business requirements[cite: 4].
-* Do not modify REQUIREMENTS.md or SPEC.md to make tests pass[cite: 4].
-* This project uses FastAPI. Maintain the separation of concerns (Router -> Logic -> Repository).
+## Read First
+1. REQUIREMENTS.md
+2. SPEC.md
+3. ARCHITECTURE.md
+4. docs/REPO_MAP.md
 
-## Validation
-* Run `pytest` before and after changes[cite: 4].
-* Add tests for new behavior using `TestClient` from FastAPI[cite: 4].
-* Stop and ask for clarification if requirements conflict[cite: 4].v
+## Sources of Truth
+- Requirements live only in REQUIREMENTS.md.
+- Do not change requirements merely to make tests pass.
+
+## Standard Commands
+- Install dependencies: `pip install -r requirements.txt` (or FastAPI, Uvicorn, pytest)
+- Run tests: `pytest -v`
+- Verify repository: `scripts/verify_repo.sh`
+
+## Change Rules
+- Keep changes scoped to the requested task (`TASK UNDER TEST.md`).
+- Do not weaken existing tests.
+- Do not modify secrets or generated files.
+
+## Stop Conditions
+Stop and ask for human input when requirements conflict or a destructive action is required.
