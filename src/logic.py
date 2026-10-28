@@ -4,6 +4,9 @@ def filter_customers(customers: list, query: str) -> list:
     Lanza ValueError si el término es menor a 3 caracteres.
     Retorna la lista de clientes que coinciden con query en name o email (case-insensitive).
     """
+    if query is not None:
+        query = query.strip()
+
     if query is None or len(query) < 3:
         raise ValueError("Search term must be at least 3 characters long.")
 

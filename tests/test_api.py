@@ -22,3 +22,17 @@ def test_search_no_results():
     response = client.get("/api/customers/search?q=xyz")
     assert response.status_code == 200
     assert response.json() == []
+
+def test_search_with_surrounding_whitespace():
+    """Prueba CR-01 / FR-03: Término con espacios circundantes retorna coincidencias correctamente tras trim"""
+    response = client.get("/api/customers/search?q=  lop  ")
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data) > 0
+    assert any(c["name"] == "Maria Lopez" and c["email"] == "mlopez@test.com" for c in data)
+
+def test_search_whitespace_only_validation_error():
+    """Prueba CR-01 / FR-06: Término con espacios insuficientes o solo espacios debe retornar 400"""
+    response = client.get("/api/customers/search?q=   ")
+    assert response.status_code == 400
+    assert response.json() == {"detail": "Search term must be at least 3 characters long."}
